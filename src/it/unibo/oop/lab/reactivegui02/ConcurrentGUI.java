@@ -60,7 +60,6 @@ public final class ConcurrentGUI extends JFrame {
 
     /** 
      * The counter agent.
-     *
      */
     private class Agent implements Runnable {
 
