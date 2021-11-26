@@ -16,8 +16,8 @@ import javax.swing.SwingUtilities;
 public final class ConcurrentGUI extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private static final double WIDTH_PERC = 0.2;
-    private static final double HEIGHT_PERC = 0.1;
+    private static final double WIDTH_REDUX = 0.2;
+    private static final double HEIGHT_REDUX = 0.1;
     private final JLabel display = new JLabel();
 
 
@@ -27,20 +27,21 @@ public final class ConcurrentGUI extends JFrame {
     public ConcurrentGUI() {
         super();
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize((int) (screenSize.getWidth() * WIDTH_PERC), (int) (screenSize.getHeight() * HEIGHT_PERC));
+        this.setSize((int) (screenSize.getWidth() * WIDTH_REDUX), (int) (screenSize.getHeight() * HEIGHT_REDUX));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         final JPanel panel = new JPanel();
         panel.add(display);
+        // Up button
         final JButton up = new JButton("up");
         panel.add(up);
-
+        // Down button
         final JButton down = new JButton("down");
         panel.add(down);
-
+        // Stop button
         final JButton stop = new JButton("stop");
         panel.add(stop);
-
+        // Handlers
         final Agent agent = new Agent();
         up.addActionListener(e -> agent.countUp());
         down.addActionListener(e -> agent.countDown());
@@ -53,6 +54,8 @@ public final class ConcurrentGUI extends JFrame {
 
         this.getContentPane().add(panel);
         this.setVisible(true);
+
+        new Thread(agent).start();
     }
 
     /** 
